@@ -39,7 +39,8 @@ access conditions and instructions for requesting access.
 There are several ways to create a record:
 - **Use the form.** The
   [metadata app](https://cgiar-climate-data-hub.github.io/CDH-metadata-app/)
-  provides field descriptions, validation, and a submission option.
+  provides field descriptions and validation. Copy the generated YAML into the
+  SFP submission form below; its own Submit button sends to CDH.
 - **Use an AI agent.** The
   [cdh-metadata skill](https://github.com/CGIAR-Climate-Data-Hub/skills/tree/main/.agents/skills/cdh-metadata)
   helps draft a record from source documentation and data. See the
@@ -89,8 +90,11 @@ during review.
 
 ## Submit for review
 
-Submit through the metadata app or an issue or pull request to the
+Paste the generated YAML into the
+[SFP submission form](https://github.com/CGIAR-Sustainable-Farming/catalog/issues/new?template=submit-record.yml),
+or open a pull request in the
 [catalog repository](https://github.com/CGIAR-Sustainable-Farming/catalog).
+Submissions are reviewed manually until the submission GitHub App is configured.
 Include any questions or gaps that need help from the reviewers.
 
 Submissions follow the

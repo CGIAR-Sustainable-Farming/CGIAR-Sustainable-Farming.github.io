@@ -43,13 +43,13 @@ steps:
       href: https://github.com/CGIAR-Climate-Data-Hub/cdh-metadata-standard/blob/main/spec/authoring-guide.md#validation-checklist
   - title: Submit and review
     body: >
-      Use the shared metadata app to prepare a draft, then open an issue or pull request on the SFP catalog
-      repository. Include any open questions. Reviewers assess scope, scientific
+      Use the shared metadata app to prepare a draft, then copy its YAML into the SFP submission form.
+      The shared app's Submit button targets CDH. SFP submissions are reviewed manually until automation is configured. Include any open questions. Reviewers assess scope, scientific
       suitability, metadata, and licensing, and may ask for changes. Once approved, the record
       is merged and the dataset appears in the catalog.
     link:
-      label: "Governance: review process"
-      href: /wikis/governance/#review-process
+      label: "Submit metadata to SFP"
+      href: https://github.com/CGIAR-Sustainable-Farming/catalog/issues/new?template=submit-record.yml
 checklist:
   - The dataset is in scope and carries a valid license with attribution and citation details.
   - Hosted data is in a cloud-optimized format, and the layout choice is documented in the record.
