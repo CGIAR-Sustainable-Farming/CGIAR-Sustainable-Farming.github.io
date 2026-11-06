@@ -69,3 +69,13 @@ collections are defined in `src/content.config.ts`; site-wide constants live in
   third repetition, promote to a shared component or class.
 - Prune at the end of each feature: merge style blocks that have converged,
   delete selectors nothing uses. Component styles die with their component.
+
+## SFP deployment
+
+This fork belongs to CGIAR-Sustainable-Farming. Use `bun run build` for strict
+source refresh, approved-record validation, type checks, build and local-link
+checks. Do not publish drafts as approved records. Shared guide refresh is
+restricted to scripts/prepare-upstream.mjs allowlist. SFP identity, local
+content and catalogue are not upstream mirrors. Keep standard upgrades
+deliberate. Public source evidence only; private planning stays outside this
+checkout.

@@ -1,23 +1,20 @@
 name: CI
-
 on:
   pull_request:
   workflow_dispatch:
-
+permissions:
+  contents: read
 jobs:
   check:
     runs-on: ubuntu-latest
-    env:
-      # Authenticates the catalog-records fetch (shared runner IPs exhaust
-      # the anonymous API rate limit)
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
       - run: bun install --frozen-lockfile
-      - name: Lint & format (Biome)
-        run: bun run ci
-      - name: Type-check
-        run: bun run astro check
-      - name: Build
-        run: bun run build
+      - run: bun run ci
+      - run: bun run build

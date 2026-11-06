@@ -1,0 +1,44 @@
+name: Propose CDH component updates
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 4 * * 1"
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Merge upstream on a proposal branch
+        id: merge
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git remote add upstream https://github.com/CGIAR-Climate-Data-Hub/CGIAR-Climate-Data-Hub.github.io.git
+          git fetch upstream main
+          if git merge-base --is-ancestor upstream/main HEAD; then exit 0; fi
+          git checkout -b automation/cdh-upstream
+          git merge --no-edit upstream/main
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+      - if: steps.merge.outputs.changed == 'true'
+        run: bun install --frozen-lockfile && bun run ci && bun run build
+      - name: Open tested update for review
+        if: steps.merge.outputs.changed == 'true'
+        run: |
+          git fetch origin automation/cdh-upstream:refs/remotes/origin/automation/cdh-upstream || true
+          git push origin automation/cdh-upstream --force-with-lease
+          if ! gh pr view automation/cdh-upstream >/dev/null 2>&1; then
+            gh pr create --base main --head automation/cdh-upstream --title 'Update shared CDH website components' --body 'Automated upstream merge passed lint, metadata validation, type checks, build and local-link checks. Review SFP branding, content boundaries and workflows before merging. No automatic merge.'
+          fi

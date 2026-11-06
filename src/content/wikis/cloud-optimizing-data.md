@@ -6,6 +6,12 @@ updated: 2026-10-27
 order: 3
 ---
 
+> Shared CGIAR Climate Data Hub guidance.
+> [Upstream source](https://github.com/CGIAR-Climate-Data-Hub/CGIAR-Climate-Data-Hub.github.io/blob/d244ba1cd96a226aa50e7807006b0d9ab7da4e31/src/content/wikis/cloud-optimizing-data.md);
+> reused under CC BY 4.0. SFP publication decisions follow
+> [SFP review guidance](/wikis/governance/).
+
+
 The Hub aims to make analysis-ready, cloud-optimized (ARCO) data available
 wherever that is practical and useful. Formats such as Cloud Optimized GeoTIFF,
 Zarr, and GeoParquet let people read the parts of a dataset they need without

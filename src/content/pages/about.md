@@ -1,39 +1,47 @@
 ---
-title: One backbone for climate evidence across CGIAR.
+title: Evidence for sustainable farming.
 lede: >
-  The Climate Action Data Hub increases the visibility, accessibility and usability of climate-related
-  data, methods and tools — so researchers, program designers and partner countries can get to
-  trustworthy evidence fast, and build on each other's work instead of starting over.
+  The Sustainable Farming Data Hub connects agronomy, soils, plant health and climate resources,
+  using shared CGIAR Climate Data Hub components and metadata standards.
 missions:
-  - title: Find
-    body: >
-      Quality-assured datasets, consistently formatted and documented, discoverable from a single
-      catalog.
-  - title: Use
-    body: >
-      Cloud-native distributions, runnable tutorials, and reference docs that turn raw climate
-      data into decision-ready analysis.
-  - title: Apply
-    body: >
-      Use-case stories that connect the data to real decisions and finance.
+  - title: Discover
+    body: Find research resources and follow links to their original providers.
+  - title: Understand
+    body: Inspect methods, units, provenance, licences and limitations before use.
+  - title: Connect
+    body: Reuse shared guides and tools across CGIAR programmes.
 principles:
-  - title: Open by default
-    body: Data is CC-BY-4.0 unless noted; code is open-source; standards are public.
-  - title: Metadata over marketing
-    body: Every dataset is described precisely and cited, never just linked.
-  - title: Cloud-native first
-    body: Stream and subset from object storage — pull megabytes, not terabytes.
-  - title: Built collaboratively
-    body: Centers, programs and partners contribute data, tools and stories.
+  - title: Source-aware
+    body: Source data keep their own licences, attribution and access conditions.
+  - title: Honest release status
+    body: Incomplete metadata remain drafts and are not presented as approved holdings.
+  - title: Shared foundations
+    body: Reuse CDH components and standards while keeping SFP content and decisions separate.
+  - title: Reproducible updates
+    body: Daily builds record source revisions and publish only after checks pass.
 ---
 
-The Hub is a product of CGIAR Climate Action, maintained by a small engineering
-and data-stewardship team at the
-[Alliance of Bioversity International and CIAT](https://alliancebioversityciat.org),
-working across CGIAR Centers. Datasets are reviewed against the Hub's metadata
-and data standards before publication. For more information about this process
-and the governance of the Hub, see [our governance process](/wikis/governance/).
+The
+[CGIAR Sustainable Farming Program](https://www.cgiar.org/cgiar-research-portfolio-2025-2030/sustainable-farming)
+brings together agronomy, plant health and farming-system research. It builds on
+Excellence in Agronomy, Plant Health and Mixed Farming Systems. This GitHub
+organization was formerly EiA2030 and was renamed CGIAR-Sustainable-Farming on 6
+November 2026.
 
-How the pieces fit together — the metadata layer, cloud-native distribution, the
-build pipeline and the machine interfaces — is documented in the Hub's
-[architecture blueprint](/wikis/architecture/).
+## First release
+
+The [GAIA metadata drafts](/wikis/dataset-drafts/) are available for review. No
+datasets have yet been promoted into the approved catalogue. Drafts retain
+unresolved licensing-role and source-date questions. Dataset inclusion does not
+imply that SFP produced the source data.
+
+The [static STAC root](/stac/catalog.json) is an empty starting point, not a
+populated catalogue or a searchable STAC API. The ERA–Carob proof of concept
+remains pending release-ready assets.
+
+## Shared CDH foundations
+
+Website code and selected technical guides are reused from the
+[CGIAR Climate Data Hub](https://cgiar-climate-data-hub.github.io/), with
+attribution retained. See [architecture and updates](/wikis/architecture/) for
+update boundaries and source revisions.

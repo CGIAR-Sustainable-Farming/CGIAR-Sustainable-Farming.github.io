@@ -2,12 +2,12 @@ order: 1
 title: Add a dataset
 intro: >
   A dataset joins the Hub through its metadata record. You prepare the data and the record,
-  submit the record for review, and once two reviewers approve it, it is published in the
+  submit the record for review, and once its review is complete, it is published in the
   catalog. The data can be hosted by the Hub or stay with its provider.
 steps:
   - title: Confirm scope and licensing
     body: >
-      Check that the dataset is climate-relevant for agri-food systems, comes from a credible
+      Check that the dataset is relevant to sustainable farming for agri-food systems, comes from a credible
       source, and does not duplicate something already in the catalog. It must carry a valid
       license with clear attribution and reuse terms; externally hosted data keeps whatever
       license its provider set. Unsure? Open an issue and ask before doing any work.
@@ -43,8 +43,8 @@ steps:
       href: https://github.com/CGIAR-Climate-Data-Hub/cdh-metadata-standard/blob/main/spec/authoring-guide.md#validation-checklist
   - title: Submit and review
     body: >
-      Submit through the metadata app, or open an issue or pull request on the catalog
-      repository. Include any open questions. Two reviewers assess scope, scientific
+      Use the shared metadata app to prepare a draft, then open an issue or pull request on the SFP catalog
+      repository. Include any open questions. Reviewers assess scope, scientific
       suitability, metadata, and licensing, and may ask for changes. Once approved, the record
       is merged and the dataset appears in the catalog.
     link:

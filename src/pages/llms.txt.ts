@@ -17,7 +17,7 @@ export const GET: APIRoute = async ({ site }) => {
 
   const md = `# ${SITE_PUBLISHER_NAME}
 
-> A curated catalog of quality-assured climate and agricultural datasets, described consistently, openly licensed, and published in cloud-native formats. Use the catalog to discover datasets, inspect metadata, cite original publishers, and access Zarr, Cloud-Optimized GeoTIFF, and Parquet assets plus STAC metadata directly.
+> Sustainable Farming data hub. Published catalogue records and incomplete metadata drafts are separate. Source licences and limitations apply. The initial STAC root is empty scaffolding, not a populated STAC service. Shared CDH guides and skills retain upstream provenance.
 
 The Hub also provides practical tutorials and wiki documentation for finding, evaluating, accessing, and using its datasets.
 

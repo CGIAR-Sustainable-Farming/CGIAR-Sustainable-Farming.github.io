@@ -36,3 +36,7 @@ pnpm-debug.log*
 /.quarto/
 
 **/*.quarto_ipynb
+
+# Transient upstream snapshots and build provenance
+.cache/
+public/upstream-provenance.json

@@ -1,6 +1,6 @@
 ---
 title: Authoring a metadata record
-description: Prepare, check, and submit a dataset metadata record to the Climate Action Data Hub.
+description: Prepare, check, and submit a dataset metadata record to the Sustainable Farming Data Hub.
 audience: Anyone
 topic: Onboarding
 time: 30 min
@@ -20,10 +20,10 @@ shared metadata. The standard's
 provides detailed field requirements and examples.
 
 Review the submitted and approved records in the
-[catalog repository](https://github.com/CGIAR-Climate-Data-Hub/cdh-catalog/tree/main/records)
+[catalog repository](https://github.com/CGIAR-Sustainable-Farming/catalog/tree/main/records)
 to get an idea of the fields and the metadata shape. The
-[website catalog](https://cgiar-climate-data-hub.github.io/catalog/) shows the
-same records in a more human-readable format.
+[website catalog](https://cgiar-sustainable-farming.github.io/catalog/) shows
+the same records in a more human-readable format.
 
 ## Gather the source information
 
@@ -90,7 +90,7 @@ during review.
 ## Submit for review
 
 Submit through the metadata app or an issue or pull request to the
-[catalog repository](https://github.com/CGIAR-Climate-Data-Hub/cdh-catalog).
+[catalog repository](https://github.com/CGIAR-Sustainable-Farming/catalog).
 Include any questions or gaps that need help from the reviewers.
 
 Submissions follow the

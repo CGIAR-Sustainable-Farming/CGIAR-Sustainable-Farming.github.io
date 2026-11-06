@@ -1,10 +1,9 @@
 ---
-question: What is the Climate Action Data Hub?
+question: What is the Sustainable Farming Data Hub?
 order: 1
 ---
 
-A quality-assured catalog of climate and agriculture datasets across CGIAR
-Climate Action. Every dataset is harmonized to one
-[metadata standard](https://github.com/CGIAR-Climate-Data-Hub/cdh-metadata-standard),
-openly licensed, and distributed in cloud-native formats, so it can be
-discovered, cited, and used the same way.
+A catalogue and documentation hub for sustainable farming research, reusing CDH
+software, metadata standards and technical guidance. Initial GAIA records are
+[review drafts](/wikis/dataset-drafts/); the approved catalogue is initially
+empty. Each resource retains its original attribution, licence and limitations.

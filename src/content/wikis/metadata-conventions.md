@@ -6,6 +6,12 @@ updated: 2026-10-23
 order: 2
 ---
 
+> Shared CGIAR Climate Data Hub guidance.
+> [Upstream source](https://github.com/CGIAR-Climate-Data-Hub/CGIAR-Climate-Data-Hub.github.io/blob/d244ba1cd96a226aa50e7807006b0d9ab7da4e31/src/content/wikis/metadata-conventions.md);
+> reused under CC BY 4.0. SFP publication decisions follow
+> [SFP review guidance](/wikis/governance/).
+
+
 Metadata is the core of the Hub as the shared layer that brings all of the
 datasets together. Whether data is hosted by the Hub or an external provider,
 each dataset is described through a common metadata standard. These records

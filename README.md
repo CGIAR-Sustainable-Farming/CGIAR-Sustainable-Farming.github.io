@@ -1,103 +1,78 @@
-# CGIAR Climate Action Data Hub
+# CGIAR Sustainable Farming Data Hub
 
-## Development
+Website: https://cgiar-sustainable-farming.github.io
 
-```sh
-bun install
-bun run dev     # dev server at localhost:4321
-bun run build   # static build to dist/
-bun run check   # lint + format (Biome)
-```
+Built from the
+[CGIAR Climate Data Hub website](https://github.com/CGIAR-Climate-Data-Hub/CGIAR-Climate-Data-Hub.github.io),
+baseline `d244ba1cd96a226aa50e7807006b0d9ab7da4e31`.
 
-### Wiki PDFs
+## Local development
 
-Some wikis double as PDF deliverables, e.g. the architecture blueprint at
-`src/content/wikis/architecture/index.md`. [Quarto](https://quarto.org) renders
-them with Typst (bundled, no LaTeX):
+Requires Node >=22.12 and Bun 1.4.4.
 
 ```sh
-bun run pdf     # writes pdfs/<wiki>.pdf (gitignored)
+bun install --frozen-lockfile
+bun run build
+RECORDS_DIR=.cache/catalog/records SKILLS_DIR=.cache/skills/.agents/skills bun run dev
+bun run check
 ```
 
-Quarto 1.10+ must be on your PATH for this. It is only needed to generate PDFs
-from content; the site build does not use it.
+`build` strictly refreshes selected shared guides, skills, catalogue and the
+pinned metadata validator. It validates approved records, type-checks Astro,
+builds the site and checks local links. Public network access is required.
+Source fetch failures abort the build; stale/empty fallback is not used for
+production.
 
-`_quarto.yml` lists which wikis render and holds the print settings. To export
-another wiki, give it its own folder (`wikis/<name>/index.md`, images beside it)
-and add the file to `project.render`. The PDF is generated on demand, not in the
-site build; nothing is committed.
+## Automatic updates
 
-Two constraints on the content: wiki frontmatter must avoid keys Quarto reserves
-(`section` is why the sidebar key is `group`), and diagrams must be image
-references rather than inline `<svg>`, which Pandoc drops on the way to PDF. Use
-absolute URLs for links you want clickable in print.
+- **Daily at 03:23 UTC:** fetch selected CDH guides, current CDH skills and SFP
+  catalogue; build and deploy only after checks pass. GitHub scheduling can be
+  delayed. Manual Actions dispatch is available.
+- **Weekly Monday at 04:41 UTC:** propose upstream website-code merges in
+  `automation/cdh-upstream`, run checks, and open a PR. No automatic merge.
+  Conflicts or failed checks stop the proposal and appear as failed Actions
+  runs. Maintainers must review changes before merge.
+- **SFP content:** branding, programme pages, governance and metadata stay
+  separate. Shared content refresh uses the exact guide allowlist in
+  `scripts/prepare-upstream.mjs` and adds attribution. No CDH datasets are
+  imported by default.
+- **Metadata standard:** pinned v0.5.0, not silently upgraded. Skills may
+  describe newer upstream practices; records must still pass the supported
+  version's validator.
+- **Provenance:** every deployment records source commits and refresh time at
+  `/upstream-provenance.json`.
 
-### Lighthouse CI
+Upstream code PRs require repository Actions permission to create pull requests.
+No new long-lived secret or cross-repository dispatch token is required. Website
+Pages source is GitHub Actions. Daily rebuilds pick up catalogue changes even
+without a dispatch event.
 
-`bun run lh` builds the site with the bundled example records and skills, then
-audits the URLs configured in `lighthouserc.json`. Reports are written to the
-gitignored `.lighthouseci/` directory; each run replaces the previous results.
-Open the latest local report with:
+## Metadata and STAC status
 
-```sh
-bun run lh:open
-```
+[SFP catalogue](https://github.com/CGIAR-Sustainable-Farming/catalog) keeps
+`drafts/` separate from approved `records/`. Initial GAIA records remain drafts
+with explicit gaps. The approved catalogue is initially empty. Schema success
+does not approve roles, licences or scientific claims.
 
-Pull requests to `main` run the same checks and attach the reports to the
-Lighthouse workflow as a downloadable artifact. The `robots-txt` audit is
-skipped because the pinned Lighthouse version does not yet recognize the valid
-`Content-Signal` directive used by the site.
+`/stac/catalog.json` is an empty STAC 1.1.0 Catalog scaffold, not a populated
+catalogue or search API. `/catalog.json` is Schema.org JSON-LD and is not STAC.
+ERA–Carob registration and a source-backed STAC mapping remain separate work; do
+not fabricate extents or observation dates.
 
-### Commit hooks
+## Content ownership and contribution
 
-Lint/format checks run as git hooks via [prek](https://github.com/j178/prek) — a
-drop-in [pre-commit](https://pre-commit.com) replacement; both read the same
-`.pre-commit-config.yaml`, so use whichever you have:
+Shared guide edits should go upstream; daily refresh overwrites their local
+copies. SFP-specific content edits belong here. Submit metadata changes to the
+catalogue repository. Never copy private planning files, internal correspondence
+or credentials into these repositories.
 
-```sh
-prek install          # or: pre-commit install
-```
+## Attribution and licensing
 
-On commit this runs Biome (JS/TS/Astro/CSS), ruff (Python snippets and
-notebooks), air (R snippets), and basic file hygiene checks.
-
-## Catalog records
-
-Dataset records are **not** in this repo — the `catalog` collection is fetched
-at build time from
-[`cdh-catalog`](https://github.com/CGIAR-Climate-Data-Hub/cdh-catalog)'s
-`records/` directory (that repo triggers a site rebuild when records change). To
-point a local session elsewhere, use shell environment variables (`.env` files
-don't reach the loader):
-
-```sh
-# A local checkout — offline, previews uncommitted records
-RECORDS_DIR=../cdh-catalog/records bun run dev
-
-# A branch of cdh-catalog (e.g. an open data PR)
-RECORDS_REF=my-branch bun run dev
-
-# A different repo, e.g. a fork (composes with RECORDS_REF)
-RECORDS_REPO=you/cdh-catalog bun run dev
-```
-
-Unset, builds fetch `cdh-catalog@main`. If the records fetch fails, the
-previously loaded records are kept, so offline dev keeps working — unless
-`REQUIRE_RECORDS` is set (the deploy workflow's guard), in which case a build
-that would produce an empty catalog fails instead.
-
-No records checked out? `bun run dev:example` runs the site against the bundled
-fixtures in `examples/records/` — a populated catalog for frontend work without
-cloning `cdh-catalog`. The fixtures are dev-only: nothing uses them unless
-`RECORDS_DIR` points at them.
-
-Don't commit record YAML to this repo — `src/content/catalog/` is gitignored and
-anything in it is ignored by the build; records belong in `cdh-catalog`.
-
-## Licensing
-
-- **Website content** (text, documentation, images) is licensed under
-  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-- **Source code** is licensed under [MIT](./LICENSE).
-- **Datasets** are licensed individually — see the `license` field of each
-  catalog record.
+- Upstream source code: MIT; original [LICENSE](LICENSE) retained.
+- Reused CDH website text and documentation:
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); source links
+  included on shared pages.
+- SFP logos: original programme artwork from the official branding library; no
+  trademark rights are granted by the code licence.
+- Datasets: individual source licences and attribution apply; no blanket data
+  licence or redistribution claim.

@@ -1,0 +1,23 @@
+{
+  "stac_version": "1.1.0",
+  "type": "Catalog",
+  "id": "sfp",
+  "description": "Sustainable Farming static STAC scaffold. No approved collections or items yet; metadata drafts are not published holdings.",
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://cgiar-sustainable-farming.github.io/stac/catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "root",
+      "href": "https://cgiar-sustainable-farming.github.io/stac/catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "about",
+      "href": "https://cgiar-sustainable-farming.github.io/about/",
+      "type": "text/html"
+    }
+  ]
+}

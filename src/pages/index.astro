@@ -52,10 +52,10 @@ const essentials = [
 
 const PATHS = [
   {
-    href: "/catalog/",
+    href: "/wikis/dataset-drafts/",
     icon: "M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14Zm10 17-4.3-4.3",
-    label: "Find a specific dataset",
-    cue: "Search & filter",
+    label: "Explore metadata drafts",
+    cue: "GAIA soils and crop responses",
   },
   {
     href: "/tutorials/",
@@ -80,33 +80,33 @@ const PATHS = [
 const PRINCIPLES = [
   [
     "Quality-assured",
-    "Every dataset is reviewed, documented and versioned before it lands — so you can trust what you build on.",
+    "Approved records and review drafts are kept separate. Check source evidence, release status and limitations before use.",
   ],
   [
     "One shared standard",
-    "STAC items and a common schema mean discovery, citation and access work the same way for every layer.",
+    "CDH metadata supports consistent discovery and citation. STAC publication is a separate, developing capability.",
   ],
   [
     "Openly licensed",
-    "CC-BY by default. Cite the source and reuse freely — for research, decision-support or finance.",
+    "Each resource retains its source licence, attribution and access conditions. Check these before reuse.",
   ],
   [
     "Cloud-native & interoperable",
-    "COG and Zarr: query data where it lives, or stream just the window you need — no bespoke plumbing.",
+    "Use original provider assets and documented formats. Cloud-optimized access is available only where the source supports it.",
   ],
 ];
 ---
 
-<Layout title={`${SITE_NAME} — Climate evidence, decision-ready`}>
+<Layout title={`${SITE_NAME} — Sustainable farming data and tools`}>
   <section class="hero">
     <div class="container hero-grid">
       <div class="statement">
-        <div class="label kicker">CGIAR · Climate Action</div>
-        <h1>Climate evidence,<br>decision-ready.</h1>
+        <div class="label kicker">CGIAR · Sustainable Farming</div>
+        <h1>Farming evidence,<br>connected.</h1>
         <p class="lede">
-          One quality-assured home for climate data, tools, and documentation
-          across CGIAR — consistently formatted, openly licensed, and ready to
-          use.
+          Discover sustainable farming data, tools and shared guidance. Our
+          first GAIA metadata records are under review; explore their sources
+          and remaining questions before use.
         </p>
 
         <PagefindConfig instance="hero" />
@@ -162,7 +162,7 @@ const PRINCIPLES = [
     <div class="container">
       <SectionHeader
         kicker="Highlights"
-        sub="A curated mix of datasets, tutorials, and reference docs — the pieces most climate work on the Hub is built on."
+        sub="A curated mix of datasets, tutorials, and reference docs — shared guidance for sustainable farming research."
         title="Featured data & lessons"
       >
         <a class="btn btn-ghost" href="/catalog/" slot="right"
@@ -225,9 +225,9 @@ const PRINCIPLES = [
           <div class="label band-kicker">Why the Hub works this way</div>
           <h2>Findable once.<br>Usable everywhere.</h2>
           <p class="band-lede">
-            Climate evidence across CGIAR used to live in scattered formats and
-            portals. The Hub brings it under one set of principles, so teams can
-            build on each other's work instead of starting over.
+            Sustainable farming draws on agronomy, soils, plant health and
+            climate evidence. Shared metadata helps connect these resources
+            while preserving their sources and limitations.
           </p>
           <a class="band-link" href="/about/">More about the Hub →</a>
         </div>
@@ -253,7 +253,7 @@ const PRINCIPLES = [
       <div>
         <h2>The Hub grows because people add to it.</h2>
         <p>
-          If your team holds climate-relevant data, a reusable tool, or a story
+          If your team holds farming-relevant data, a reusable tool, or a story
           worth telling, there is a clear path in.
         </p>
       </div>

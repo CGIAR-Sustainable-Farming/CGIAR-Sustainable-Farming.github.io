@@ -1,5 +1,5 @@
 {
-  "name": "site",
+  "name": "sustainable-farming-data-hub",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:example": "RECORDS_DIR=examples/records SKILLS_DIR=examples/skills astro dev",
-    "build": "astro build",
+    "build": "node scripts/build.mjs",
     "build:example": "RECORDS_DIR=examples/records SKILLS_DIR=examples/skills astro build",
     "lh": "bun run build:example && lhci autorun",
     "lh:open": "lhci open --no-lighthouserc",

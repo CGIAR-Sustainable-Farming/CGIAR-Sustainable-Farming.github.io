@@ -1,24 +1,20 @@
-/* CDH design tokens — aligned to the CGIAR Climate Action visual identity.
-   Identity rules:
-   • #63A9FE is the primary program colour; #1955A6 is the program accent (links/actions).
-   • Terracotta is the single warm accent (kickers, one CTA, anomaly signal).
-   • CGIAR green is reserved for the footer band only — never beside program blue. */
+/* SFP palette. CDH token names retained for shared-component compatibility. */
 :root {
   /* Program blues (brand hexes: #63A9FE primary, #1955A6 accent; ramp extended in-hue) */
-  --cdh-blue-950: #0c2c57;
-  --cdh-blue-800: #123f79;
-  --cdh-blue-700: #1955a6;
-  --cdh-blue-500: #3b7ed4;
-  --cdh-blue-300: #63a9fe;
-  --cdh-blue-150: #a9cdfe;
-  --cdh-blue-50: #e9f2ff;
+  --cdh-blue-950: #033529;
+  --cdh-blue-800: #353824;
+  --cdh-blue-700: #494c32;
+  --cdh-blue-500: #767356;
+  --cdh-blue-300: #a8a07d;
+  --cdh-blue-150: #d3cdb7;
+  --cdh-blue-50: #f0eee5;
 
   /* Terracotta — the single warm accent */
-  --terra-900: #6e2c12;
-  --terra-700: #b44a22;
-  --terra-500: #cb6a3e;
-  --terra-300: #e0a783;
-  --terra-50: #f3e4da;
+  --terra-900: #033529;
+  --terra-700: #494c32;
+  --terra-500: #767356;
+  --terra-300: #a8a07d;
+  --terra-50: #f0eee5;
 
   /* CGIAR green — footer band only */
   --cgiar-primary: #033529;

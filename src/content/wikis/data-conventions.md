@@ -6,6 +6,12 @@ updated: 2026-10-20
 order: 1
 ---
 
+> Shared CGIAR Climate Data Hub guidance.
+> [Upstream source](https://github.com/CGIAR-Climate-Data-Hub/CGIAR-Climate-Data-Hub.github.io/blob/d244ba1cd96a226aa50e7807006b0d9ab7da4e31/src/content/wikis/data-conventions.md);
+> reused under CC BY 4.0. SFP publication decisions follow
+> [SFP review guidance](/wikis/governance/).
+
+
 The Hub brings together climate and climate-adjacent datasets produced by CGIAR
 and partner organizations, alongside external datasets widely used by the
 research and data community. Users can discover these datasets through a shared

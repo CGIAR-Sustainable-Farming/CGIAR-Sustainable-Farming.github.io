@@ -1,6 +1,5 @@
 ---
-import caspLogo from "@/assets/CASP_logo.svg";
-import caspLogoWhite from "@/assets/CASP_logo_white.svg";
+import sfpLogo from "@/assets/SFP_logo.png";
 import { SITE_NAME } from "@/site.config";
 
 interface Props {
@@ -16,12 +15,7 @@ const onDark = variant === "dark";
   href="/"
   class:list={["logo-block", { dark: onDark }]}
 >
-  <img
-    alt=""
-    height="56"
-    src={onDark ? caspLogoWhite.src : caspLogo.src}
-    width="117"
-  >
+  <img alt="" height="56" src={sfpLogo.src} width="139">
   <span class="wordmark">{SITE_NAME}</span>
 </a>
 
