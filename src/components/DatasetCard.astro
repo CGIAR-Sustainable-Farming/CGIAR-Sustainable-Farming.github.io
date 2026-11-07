@@ -6,9 +6,10 @@ import DataGlyph from "./DataGlyph.astro";
 
 interface Props {
   dataset: DatasetSummary;
+  externalUrl?: string;
 }
 
-const { dataset: d } = Astro.props;
+const { dataset: d, externalUrl } = Astro.props;
 const facts = [
   [d.coverage, d.resolution].filter(Boolean).join(" · "),
   [d.license, d.temporal].filter(Boolean).join(" · "),
@@ -18,9 +19,21 @@ const facts = [
 <article class="card ds-card">
   <span class="label type">
     <DataGlyph size={13} type={d.type} />
-    {d.type === "spatial" ? "Spatial" : "Tabular"}
+    {externalUrl
+      ? "Featured · Climate Data Hub ↗"
+      : d.type === "spatial"
+        ? "Spatial"
+        : "Tabular"}
   </span>
-  <h2><a href={`/catalog/${d.id}/`} title={d.title}>{d.title}</a></h2>
+  <h2>
+    <a
+      href={externalUrl ?? `/catalog/${d.id}/`}
+      rel={externalUrl ? "noopener noreferrer" : undefined}
+      target={externalUrl ? "_blank" : undefined}
+      title={d.title}
+      >{d.title}</a
+    >
+  </h2>
   {d.source && (
     <p class="source" title={d.source}>
       By {d.source}
@@ -43,6 +56,10 @@ const facts = [
 }
 
 /* The title is the link, but the whole card lights like a linked card */
+.ds-card:has(a[target="_blank"]) :is(.type, .source, .summary, .meta) {
+  pointer-events: none;
+}
+
 .ds-card:hover {
   border-color: var(--link);
 }

@@ -15,12 +15,24 @@ import {
 } from "@/lib/catalog";
 import { projectLonLat } from "@/lib/coordinates";
 import { landPath } from "@/lib/map";
-import { SITE_NAME } from "@/site.config";
+import { CDH_CATALOG, FEATURED_CDH_IDS, SITE_NAME } from "@/site.config";
 
 const entries = currentReleases(await getCollection("catalog"));
-const datasets = entries
-  .map(summarize)
-  .sort((a, b) => b.updated.localeCompare(a.updated));
+const featured = await getCollection("featuredCdh");
+const datasets = [
+  ...FEATURED_CDH_IDS.map((id) => {
+    const entry = featured.find((item) => item.data.id === id);
+    if (!entry) throw new Error(`Missing featured CDH dataset: ${id}`);
+    return {
+      ...summarize(entry),
+      externalUrl: new URL(`${id}/`, CDH_CATALOG).href,
+    };
+  }),
+  ...entries
+    .map(summarize)
+    .sort((a, b) => b.updated.localeCompare(a.updated))
+    .map((d) => ({ ...d, externalUrl: undefined })),
+];
 
 // Facets are compiled from the metadata actually present in the records.
 function facetOf(
@@ -80,7 +92,7 @@ const H = 110;
 const land = landPath(W, H);
 
 const description =
-  "Browse approved sustainable farming records. Initial GAIA metadata remain review drafts; source licences and access conditions apply.";
+  "Browse sustainable farming datasets and selected records from the CGIAR Climate Data Hub.";
 
 const catalogSchema = {
   "@context": "https://schema.org",
@@ -93,7 +105,7 @@ const catalogSchema = {
     "@type": "Dataset",
     name: d.title,
     description: d.description,
-    url: new URL(`/catalog/${d.id}/`, Astro.site).href,
+    url: d.externalUrl ?? new URL(`/catalog/${d.id}/`, Astro.site).href,
   })),
 };
 ---
@@ -103,13 +115,15 @@ const catalogSchema = {
 
   <PageHead
     kicker="Find & access data"
-    sub="Browse the Hub's harmonized datasets — all with consistent metadata, licensing, and cloud-native access."
+    sub="Browse sustainable farming datasets. Featured Climate Data Hub records open in a new tab."
     title="Catalog"
   >
     <div class="head-actions" slot="right">
       <a
         class="btn btn-ghost btn-cta"
-        href="https://cgiar-climate-data-hub.github.io/catalog/"
+        href={CDH_CATALOG}
+        rel="noopener noreferrer"
+        target="_blank"
         >Browse CGIAR Climate Data Hub ↗</a
       >
       <a class="btn btn-ghost btn-cta" href="/contribute/">Contribute</a>
@@ -318,7 +332,7 @@ const catalogSchema = {
               .join(" ")
               .toLowerCase()}
           >
-            <DatasetCard dataset={d} />
+            <DatasetCard dataset={d} externalUrl={d.externalUrl} />
           </li>
         ))}
       </ul>

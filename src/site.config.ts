@@ -25,3 +25,6 @@ export const SCHEMA_SERIES = "v0.5";
 
 // org/repo slug of the catalog metadata repo (record source + data issues)
 export const CATALOG_REPO = "CGIAR-Sustainable-Farming/catalog";
+
+export const CDH_CATALOG = "https://cgiar-climate-data-hub.github.io/catalog/";
+export const FEATURED_CDH_IDS = ["npkgrids", "soilgrids", "spam2020"] as const;

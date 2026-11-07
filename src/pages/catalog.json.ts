@@ -6,7 +6,11 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
 import { currentReleases, datasetJsonLd } from "@/lib/catalog";
-import { SITE_DESCRIPTION, SITE_PUBLISHER_NAME } from "@/site.config";
+import {
+  CDH_CATALOG,
+  SITE_DESCRIPTION,
+  SITE_PUBLISHER_NAME,
+} from "@/site.config";
 
 export const GET: APIRoute = async ({ site }) => {
   const catalogUrl = new URL("/catalog/", site).href;
@@ -27,7 +31,17 @@ export const GET: APIRoute = async ({ site }) => {
     name: `${SITE_PUBLISHER_NAME} Catalog`,
     description: SITE_DESCRIPTION,
     url: catalogUrl,
-    dataset: datasets,
+    dataset: [
+      ...datasets,
+      ...(await getCollection("featuredCdh")).map(({ data }) => ({
+        "@type": "Dataset",
+        "@id": new URL(`${data.id}/`, CDH_CATALOG).href,
+        url: new URL(`${data.id}/`, CDH_CATALOG).href,
+        name: data.title,
+        description: data.description,
+        includedInDataCatalog: { "@type": "DataCatalog", "@id": CDH_CATALOG },
+      })),
+    ],
   };
 
   return new Response(JSON.stringify(doc, null, 2), {

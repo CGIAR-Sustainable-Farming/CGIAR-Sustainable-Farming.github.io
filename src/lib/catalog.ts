@@ -309,7 +309,7 @@ export function gridSpacings(d: CatalogRecord) {
 const terms = (d: CatalogRecord) =>
   d.keywords.map((k) => (typeof k === "string" ? k : k.term));
 
-export function summarize(entry: CollectionEntry<"catalog">) {
+export function summarize(entry: Pick<CollectionEntry<"catalog">, "data">) {
   const d = entry.data;
   for (const id of d.commodities)
     if (!commodity(id))

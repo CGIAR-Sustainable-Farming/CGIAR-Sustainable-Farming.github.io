@@ -6,7 +6,13 @@ import { WIKI_GROUPS } from "./lib/collections";
 import { notebooks } from "./lib/notebooks";
 import { records } from "./lib/records";
 import { skills as skillsLoader } from "./lib/skills";
-import { CATALOG_REPO, SCHEMA_SERIES, SKILLS_REPO } from "./site.config";
+import {
+  CATALOG_REPO,
+  CDH_CATALOG,
+  FEATURED_CDH_IDS,
+  SCHEMA_SERIES,
+  SKILLS_REPO,
+} from "./site.config";
 
 // One name or a list; normalised to a list so templates handle one shape
 const authors = z
@@ -253,11 +259,7 @@ const structure = z.object({
   geometry_column: z.string().optional(),
 });
 
-const catalog = defineCollection({
-  loader: records({
-    repo: CATALOG_REPO,
-    dir: "records",
-  }),
+const catalogFields = {
   schema: z
     .object({
       cdh_schema_version: z
@@ -411,6 +413,32 @@ const catalog = defineCollection({
         .default([]),
     })
     .loose(),
+};
+
+const catalog = defineCollection({
+  loader: records({
+    repo: CATALOG_REPO,
+    dir: "records",
+  }),
+  ...catalogFields,
+});
+
+const featuredCdh = defineCollection({
+  ...catalogFields,
+  loader: async () =>
+    Promise.all(
+      FEATURED_CDH_IDS.map(async (id) => {
+        const response = await fetch(new URL(`${id}.json`, CDH_CATALOG), {
+          signal: AbortSignal.timeout(30000),
+        });
+        if (!response.ok)
+          throw new Error(`CDH record ${id}: HTTP ${response.status}`);
+        const record = await response.json();
+        if (record.id !== id)
+          throw new Error(`Unexpected CDH record for ${id}`);
+        return record;
+      }),
+    ),
 });
 
 // Agent skills for the /ai/ page: one folder per skill, Claude-style
@@ -436,6 +464,7 @@ export const collections = {
   wikis,
   contributionGuides,
   catalog,
+  featuredCdh,
   faq,
   pages,
   skills,
