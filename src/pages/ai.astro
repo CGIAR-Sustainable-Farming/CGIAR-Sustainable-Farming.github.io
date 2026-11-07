@@ -110,7 +110,11 @@ const ENDPOINTS = [
         <li>
           <a
             class="card skill-card"
-            href={`${SKILLS_SITE}skills/${s.id}/`}
+            href={
+              s.id === "agwise-soil-inputs"
+                ? "/wikis/agwise-soil-inputs/"
+                : `${SKILLS_SITE}skills/${s.id}/`
+            }
             title={s.data.description}
           >
             <span class="mono skill-name">{s.data.name}</span>

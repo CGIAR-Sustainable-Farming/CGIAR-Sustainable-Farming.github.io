@@ -32,6 +32,13 @@ export function skills(source: RepoSource): Loader {
         );
         return;
       }
+      const localFiles = await fromLocal("src/skills");
+      const sharedIds = new Set(files.map((file) => file.path.split("/")[0]));
+      for (const file of localFiles) {
+        if (sharedIds.has(file.path.split("/")[0]))
+          throw new Error(`SFP skill conflicts with upstream: ${file.path}`);
+      }
+      files.push(...localFiles);
       const folders = new Map<string, SourceFile[]>();
       for (const f of files) {
         const [id, ...rest] = f.path.split("/");
